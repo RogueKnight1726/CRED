@@ -25,6 +25,7 @@ class CurvedEmbossView: UIView{
     var borderColor: CGColor?
     var borderThickness: CGFloat?
     let gradient = CAGradientLayer()
+    var topColor: UIColor?
     
     
     
@@ -33,6 +34,14 @@ class CurvedEmbossView: UIView{
         self.circular = circular
         self.borderThickness = CGFloat(borderThickness ?? 0)
         self.borderColor = borderColor?.cgColor
+    }
+    
+    convenience init(color: UIColor,circular: Bool,borderColor: UIColor?,borderThickness: Int?){
+        self.init()
+        self.circular = circular
+        self.borderThickness = CGFloat(borderThickness ?? 0)
+        self.borderColor = borderColor?.cgColor
+        self.topColor = color
     }
     
     override func didMoveToSuperview() {
@@ -64,12 +73,13 @@ class CurvedEmbossView: UIView{
         gradient.startPoint = CGPoint(x: 0, y: 0)
         gradient.endPoint = CGPoint(x: 1, y: 1)
         gradient.locations = [0,0.4,0.6,1]
+        gradient.opacity = 0.5
         self.layer.addSublayer(gradient)
         
         let maskLayer = CAGradientLayer()
         maskLayer.frame = self.bounds
         maskLayer.shadowRadius = 5
-        maskLayer.shadowPath = CGPath(roundedRect: self.bounds.insetBy(dx: 10, dy: 10), cornerWidth: self.circular ? self.bounds.height / 2 : 10, cornerHeight: self.circular ? self.bounds.height / 2 : 10, transform: nil)
+        maskLayer.shadowPath = CGPath(roundedRect: self.bounds.insetBy(dx: 8, dy: 8), cornerWidth: self.circular ? (self.bounds.height - 4) / 2 : 10, cornerHeight: self.circular ? (self.bounds.height - 4) / 2 : 10, transform: nil)
         maskLayer.shadowOpacity = 1
         maskLayer.shadowOffset = CGSize.zero
         maskLayer.shadowColor = UIColor.white.cgColor
@@ -82,7 +92,7 @@ class CurvedEmbossView: UIView{
         
         let newView = UIView.init()
         self.addSubview(newView)
-        newView.backgroundColor = UIColor(red: 0.13, green: 0.14, blue: 0.15, alpha: 1.00)
+        newView.backgroundColor = topColor ?? UIColor(red: 0.13, green: 0.14, blue: 0.15, alpha: 1.00)
         newView.translatesAutoresizingMaskIntoConstraints = false
         [newView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0),
          newView.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0),

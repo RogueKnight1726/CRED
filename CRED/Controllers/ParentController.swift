@@ -14,6 +14,7 @@ class ParentController: UIViewController{
     var scrollView: UIScrollView!
     let homeController = HomeController()
     let cardsController = CardsController()
+    let lifeStyleController = LifeStyleController()
     var bottomNavigationView: BottomBar!
     
     
@@ -52,8 +53,16 @@ class ParentController: UIViewController{
         [cardsController.view.leftAnchor.constraint(equalTo: homeController.view.rightAnchor, constant: 0),
          cardsController.view.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0),
          cardsController.view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0),
-         cardsController.view.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0),
          cardsController.view.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 0)].forEach({$0.isActive = true})
+        
+        self.addChild(lifeStyleController)
+        scrollView.addSubview(lifeStyleController.view)
+        lifeStyleController.view.translatesAutoresizingMaskIntoConstraints = false
+        [lifeStyleController.view.leftAnchor.constraint(equalTo: cardsController.view.rightAnchor, constant: 0),
+         lifeStyleController.view.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0),
+         lifeStyleController.view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0),
+         lifeStyleController.view.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0),
+         lifeStyleController.view.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 0)].forEach({$0.isActive = true})
         
         bottomNavigationView = BottomBar.init()
         view.addSubview(bottomNavigationView)

@@ -88,12 +88,12 @@ extension BottomBarCell{
                 break
         }
         descriptionLabel.text = descriptiontext
-        descriptionLabel.font = UIFont.systemFont(ofSize: 11, weight: .light)
+        descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
         descriptionLabel.textColor = AppTheme.deSelectedColor
         
         icon.translatesAutoresizingMaskIntoConstraints = false
-        [icon.heightAnchor.constraint(equalToConstant: 10),
-         icon.widthAnchor.constraint(equalToConstant: 10),
+        [icon.heightAnchor.constraint(equalToConstant: 20),
+         icon.widthAnchor.constraint(equalToConstant: 20),
          icon.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0),
          icon.rightAnchor.constraint(equalTo: descriptionLabel.leftAnchor, constant: -10)].forEach({$0.isActive = true})
         icon.contentMode = .scaleAspectFit

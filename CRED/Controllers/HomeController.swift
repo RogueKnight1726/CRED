@@ -85,7 +85,7 @@ class HomeController: UIViewController {
         
         
         layout = UICollectionViewFlowLayout.init()
-        layout?.itemSize = CGSize.init(width: 3 * view.bounds.width / 4, height: view.bounds.height - 400)
+        layout?.itemSize = CGSize.init(width: 3 * view.bounds.width / 4, height: view.bounds.height - 300)
         layout?.minimumInteritemSpacing = 0
         layout.scrollDirection = .horizontal
         layout?.minimumLineSpacing = 0

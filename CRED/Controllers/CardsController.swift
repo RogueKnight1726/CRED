@@ -74,7 +74,7 @@ class CardsController: UIViewController{
         [creditCardContainerView.leftAnchor.constraint(equalTo: guide.leftAnchor, constant: 16),
          creditCardContainerView.rightAnchor.constraint(equalTo: guide.rightAnchor, constant: -16),
          creditCardContainerView.topAnchor.constraint(equalTo: seperatorOne.bottomAnchor, constant: 20),
-         creditCardContainerView.heightAnchor.constraint(equalToConstant: 360)].forEach({$0.isActive = true})
+         creditCardContainerView.heightAnchor.constraint(equalToConstant: 410)].forEach({$0.isActive = true})
         
         let creditCard = BaseImageView.init(with: .white, circular: false, shadow: false, borderColor: nil, borderThickness: nil)
         view.addSubview(creditCard)
@@ -112,6 +112,40 @@ class CardsController: UIViewController{
         dueInLabel.textColor = AppTheme.selectedColor
         dueInLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         
+        let detailsEmbossView = CurvedEmbossView.init(circular: true, borderColor: nil, borderThickness: nil)
+        view.addSubview(detailsEmbossView)
+        detailsEmbossView.translatesAutoresizingMaskIntoConstraints = false
+        [detailsEmbossView.leftAnchor.constraint(equalTo: dueAmountLabel.leftAnchor, constant: 0),
+         detailsEmbossView.heightAnchor.constraint(equalToConstant: 80),
+         detailsEmbossView.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.42),
+         detailsEmbossView.topAnchor.constraint(equalTo: dueAmountLabel.bottomAnchor, constant: 20)].forEach({$0.isActive = true})
+        
+        let detailsButton = UIButton.init()
+        self.view.addSubview(detailsButton)
+        detailsButton.translatesAutoresizingMaskIntoConstraints = false
+        [detailsButton.centerYAnchor.constraint(equalTo: detailsEmbossView.centerYAnchor, constant: 0),
+         detailsButton.centerXAnchor.constraint(equalTo: detailsEmbossView.centerXAnchor, constant: 0)].forEach({$0.isActive = true})
+        detailsButton.setTitle("Details", for: .normal)
+        detailsButton.setTitleColor(AppTheme.cardsControllertextColor, for: .normal)
+        detailsButton.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        
+        let payNowEmbossView = CurvedEmbossView.init(color: AppTheme.accentButtonColor, circular: true, borderColor: nil, borderThickness: nil)
+        view.addSubview(payNowEmbossView)
+        payNowEmbossView.translatesAutoresizingMaskIntoConstraints = false
+        [payNowEmbossView.rightAnchor.constraint(equalTo: dueInLabel.rightAnchor, constant: 0),
+         payNowEmbossView.heightAnchor.constraint(equalToConstant: 80),
+         payNowEmbossView.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.42),
+         payNowEmbossView.topAnchor.constraint(equalTo: dueAmountLabel.bottomAnchor, constant: 20)].forEach({$0.isActive = true})
+        
+        
+        let payNowButton = UIButton.init()
+        self.view.addSubview(payNowButton)
+        payNowButton.translatesAutoresizingMaskIntoConstraints = false
+        [payNowButton.centerYAnchor.constraint(equalTo: payNowEmbossView.centerYAnchor, constant: 0),
+         payNowButton.centerXAnchor.constraint(equalTo: payNowEmbossView.centerXAnchor, constant: 0)].forEach({$0.isActive = true})
+        payNowButton.setTitle("Pay now", for: .normal)
+        payNowButton.setTitleColor(AppTheme.cardsControllertextColor, for: .normal)
+        payNowButton.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         
         let seperatorTwo = SeperatorView.init()
         view.addSubview(seperatorTwo)
@@ -166,5 +200,8 @@ class CardsController: UIViewController{
         bottomAddNewLabel.text = "Add new"
         bottomAddNewLabel.textColor = AppTheme.cardsControllertextColor
         bottomAddNewLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        
+        
+        
     }
 }
