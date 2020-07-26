@@ -103,6 +103,8 @@ class HomeController: UIViewController {
         collectionView.clipsToBounds = false
         collectionView.isPagingEnabled = true
         collectionView.showsHorizontalScrollIndicator = false
+        
+        view.clipsToBounds = true
     }
 
 

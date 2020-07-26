@@ -19,6 +19,7 @@ class InnerEmbossView: UIView{
     var borderColor: CGColor?
     var borderThickness: CGFloat?
     let gradient = CAGradientLayer()
+    let imageView = UIImageView.init()
     
     
     convenience init(circular: Bool,borderColor: UIColor?,borderThickness: Int?){
@@ -30,6 +31,11 @@ class InnerEmbossView: UIView{
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
+        self.addSubview(imageView)
+    }
+    
+    func setImage(image: UIImage){
+        imageView.image = image
     }
     
     
@@ -57,8 +63,15 @@ class InnerEmbossView: UIView{
         gradient.startPoint = CGPoint(x: 0, y: 0)
         gradient.endPoint = CGPoint(x: 1, y: 1)
         gradient.locations = [0,1]
-        self.layer.addSublayer(gradient)
+        self.layer.insertSublayer(gradient, at: 0)
         self.layer.mask = roundedShape
+        self.bringSubviewToFront(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        [imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+         imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+         imageView.heightAnchor.constraint(equalToConstant: self.bounds.height - 30),
+         imageView.widthAnchor.constraint(equalToConstant: self.bounds.height - 30)].forEach({$0.isActive = true})
+        imageView.alpha = 0.3
         
     }
     

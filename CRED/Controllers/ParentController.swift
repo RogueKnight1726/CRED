@@ -13,6 +13,7 @@ class ParentController: UIViewController{
     
     var scrollView: UIScrollView!
     let homeController = HomeController()
+    let cardsController = CardsController()
     var bottomNavigationView: BottomBar!
     
     
@@ -34,6 +35,7 @@ class ParentController: UIViewController{
          scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
          scrollView.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -60)].forEach({$0.isActive = true})
         scrollView.clipsToBounds = true
+        scrollView.isScrollEnabled = false
         
         self.addChild(homeController)
         scrollView.addSubview(homeController.view)
@@ -42,8 +44,16 @@ class ParentController: UIViewController{
          homeController.view.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0),
          homeController.view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0),
          homeController.view.heightAnchor.constraint(equalTo: scrollView.heightAnchor, constant: 0),
-         homeController.view.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 0),
-         homeController.view.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0)].forEach({$0.isActive = true})
+         homeController.view.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 0)].forEach({$0.isActive = true})
+        
+        self.addChild(cardsController)
+        scrollView.addSubview(cardsController.view)
+        cardsController.view.translatesAutoresizingMaskIntoConstraints = false
+        [cardsController.view.leftAnchor.constraint(equalTo: homeController.view.rightAnchor, constant: 0),
+         cardsController.view.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0),
+         cardsController.view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0),
+         cardsController.view.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0),
+         cardsController.view.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 0)].forEach({$0.isActive = true})
         
         bottomNavigationView = BottomBar.init()
         view.addSubview(bottomNavigationView)
@@ -52,6 +62,22 @@ class ParentController: UIViewController{
          bottomNavigationView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
          bottomNavigationView.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: 0),
          bottomNavigationView.heightAnchor.constraint(equalToConstant: 60)].forEach({$0.isActive = true})
+        bottomNavigationView.itemSelectionDelegate = self
+        
+        
     }
+    
+}
+
+
+
+extension ParentController: BottomBarSelectionProtocol{
+    func selectedItemAt(index: Int) {
+        view.layer.removeAllAnimations()
+            UIView.animate(withDuration: 0.1, delay: 0, options: [.curveEaseIn,.curveEaseOut], animations: {
+                self.scrollView.contentOffset.x = CGFloat(index) * self.view.bounds.width
+            }, completion: nil)
+    }
+    
     
 }

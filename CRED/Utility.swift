@@ -19,4 +19,5 @@ struct AppTheme{
     static let embossDarkColor = UIColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1.00)
     static let selectedColor = UIColor(red: 0.70, green: 0.45, blue: 0.36, alpha: 1.00)
     static let deSelectedColor = UIColor(red: 0.95, green: 0.71, blue: 0.62, alpha: 1.00)
+    static let cardsControllertextColor = UIColor(red: 0.63, green: 0.65, blue: 0.66, alpha: 1.00)
 }
